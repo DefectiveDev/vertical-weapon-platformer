@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c51fatmvfemv0"]
 
-[ext_resource type="Script" uid="uid://br7ueqqc2rgnr" path="res://Scenes/EnemyCharacter.cs" id="1_hghv2"]
+[ext_resource type="Script" uid="uid://br7ueqqc2rgnr" path="res://scripts/EnemyCharacter.cs" id="1_hghv2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ne65n"]
 
