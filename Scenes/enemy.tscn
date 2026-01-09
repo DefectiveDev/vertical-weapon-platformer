@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://c51fatmvfemv0"]
+
+[ext_resource type="Script" uid="uid://br7ueqqc2rgnr" path="res://Scenes/EnemyCharacter.cs" id="1_hghv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ne65n"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hghv2"]
+
+[node name="Enemy" type="Node2D"]
+
+[node name="EnemyCharacter" type="CharacterBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_hghv2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCharacter"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_ne65n")
+
+[node name="ColorRect" type="ColorRect" parent="EnemyCharacter"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -20.0
+offset_right = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
+
+[node name="RayCastRight" type="RayCast2D" parent="EnemyCharacter"]
+position = Vector2(0, -10)
+target_position = Vector2(14, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="EnemyCharacter"]
+position = Vector2(0, -10)
+scale = Vector2(-1, -1)
+target_position = Vector2(14, 0)
+
+[node name="Area2D" type="Area2D" parent="EnemyCharacter"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCharacter/Area2D"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_ne65n")
+
+[node name="Platform" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(0, 1.5)
+shape = SubResource("WorldBoundaryShape2D_hghv2")

@@ -1,3 +1,55 @@
-[gd_scene format=3 uid="uid://bxlki3y1ksc6o"]
+[gd_scene load_steps=5 format=3 uid="uid://bxlki3y1ksc6o"]
+
+[ext_resource type="PackedScene" uid="uid://4p83eae6htys" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://c51fatmvfemv0" path="res://Scenes/enemy.tscn" id="2_bo1nx"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jjgbg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jjgbg"]
+width = 10000
+height = 10
 
 [node name="Main" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_jjgbg")]
+position = Vector2(182, 628)
+
+[node name="Enemy" parent="." instance=ExtResource("2_bo1nx")]
+position = Vector2(186, 567)
+
+[node name="WorldCollisions" type="Node" parent="."]
+
+[node name="WallRight" type="StaticBody2D" parent="WorldCollisions"]
+position = Vector2(350, 1304)
+rotation = -1.5707963
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollisions/WallRight"]
+shape = SubResource("WorldBoundaryShape2D_jjgbg")
+
+[node name="Sprite2D" type="Sprite2D" parent="WorldCollisions/WallRight"]
+position = Vector2(1.3113416e-07, 3)
+texture = SubResource("NoiseTexture2D_jjgbg")
+
+[node name="WallLeft" type="StaticBody2D" parent="WorldCollisions"]
+position = Vector2(10, 1304)
+rotation = 1.5707964
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollisions/WallLeft"]
+shape = SubResource("WorldBoundaryShape2D_jjgbg")
+
+[node name="Sprite2D" type="Sprite2D" parent="WorldCollisions/WallLeft"]
+position = Vector2(1.3113416e-07, 3)
+texture = SubResource("NoiseTexture2D_jjgbg")
+
+[node name="Floor" type="StaticBody2D" parent="WorldCollisions"]
+position = Vector2(360, 630)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollisions/Floor"]
+shape = SubResource("WorldBoundaryShape2D_jjgbg")
+
+[node name="Sprite2D" type="Sprite2D" parent="WorldCollisions/Floor"]
+position = Vector2(1, 3)
+texture = SubResource("NoiseTexture2D_jjgbg")
