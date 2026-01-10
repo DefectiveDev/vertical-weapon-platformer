@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://4p83eae6htys"]
+[gd_scene load_steps=5 format=3 uid="uid://4p83eae6htys"]
 
 [ext_resource type="Script" uid="uid://c2xtpf5v1jner" path="res://scripts/Player.cs" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://dtsjhhsxqs8es" path="res://scripts/BulletSpawnPoint.cs" id="2_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://detv3ktthnrsx" path="res://Scenes/bullet.tscn" id="3_6t5aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f60y1"]
 
@@ -9,6 +11,7 @@ collision_layer = 0
 script = ExtResource("1_v0iea")
 
 [node name="Pivot" type="Node2D" parent="."]
+position = Vector2(0, -10)
 
 [node name="ColorRect" type="ColorRect" parent="Pivot"]
 anchors_preset = 8
@@ -17,24 +20,26 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -10.0
-offset_top = -20.0
+offset_top = -10.0
 offset_right = 10.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.17254902, 1, 1, 1)
 
-[node name="BulletPoint" type="Node2D" parent="Pivot"]
-position = Vector2(15, -10)
+[node name="BulletSpawnPoint" type="Node2D" parent="Pivot"]
+position = Vector2(20, 0)
+script = ExtResource("2_cvnsp")
+bulletPackedScene = ExtResource("3_6t5aa")
 
-[node name="ColorRect" type="ColorRect" parent="Pivot/BulletPoint"]
+[node name="ColorRect" type="ColorRect" parent="Pivot/BulletSpawnPoint"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -5.0
+offset_left = -10.0
 offset_top = -5.0
-offset_right = 5.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2

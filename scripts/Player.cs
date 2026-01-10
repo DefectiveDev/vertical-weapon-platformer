@@ -5,6 +5,16 @@ public partial class Player : CharacterBody2D
 {
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
+	
+	private Node2D pivot;
+
+    public override void _Ready() => pivot = GetNode<Node2D>("Pivot");
+
+
+    public override void _Process(double delta)
+    {
+        pivot.LookAt(GetGlobalMousePosition());
+    }
 
 	public override void _PhysicsProcess(double delta)
 	{
