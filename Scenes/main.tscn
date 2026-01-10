@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxlki3y1ksc6o"]
+[gd_scene load_steps=6 format=3 uid="uid://bxlki3y1ksc6o"]
 
 [ext_resource type="PackedScene" uid="uid://4p83eae6htys" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://c51fatmvfemv0" path="res://Scenes/enemy.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://detv3ktthnrsx" path="res://Scenes/bullet.tscn" id="3_8gbba"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jjgbg"]
 
@@ -16,6 +17,10 @@ position = Vector2(182, 628)
 
 [node name="Enemy" parent="." instance=ExtResource("2_bo1nx")]
 position = Vector2(186, 567)
+
+[node name="Bullet" parent="." instance=ExtResource("3_8gbba")]
+position = Vector2(41, 523)
+rotation = -0.7557276
 
 [node name="WorldCollisions" type="Node" parent="."]
 
