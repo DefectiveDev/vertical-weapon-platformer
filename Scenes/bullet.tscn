@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://cbp5vqw3u5r3k" path="res://scripts/Bullet.cs" id="1_xjght"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mw4s"]
-size = Vector2(10, 10)
+size = Vector2(15, 15)
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_xjght")
-Speed = 10.0
+Speed = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4mw4s")
@@ -22,15 +22,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 7.5
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.81666666, 0, 1)
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-rect = Rect2(-5, -5, 10, 10)
+rect = Rect2(-7.5, -7.5, 15, 15)
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_4mw4s")
+collision_mask = 4
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="OnScreenExited"]

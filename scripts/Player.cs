@@ -8,18 +8,11 @@ public partial class Player : CharacterBody2D
 	public const float RecoilImpulse = -400.0f;
 	
 	private Node2D pivot;
-	private RayCast2D rayCastLeft;
-	private RayCast2D rayCastRight;
 
     private Func<Vector2,Vector2> bulletHitCalculate;
 
-    public override void _Ready()
-    {
-        pivot = GetNode<Node2D>("Pivot");
+    public override void _Ready() => pivot = GetNode<Node2D>("Pivot");
 
-        rayCastLeft = GetNode<RayCast2D>("RayCastLeft");
-        rayCastRight = GetNode<RayCast2D>("RayCastRight");
-    }
 
     private void OnBulletHitEnemy(EnemyCharacter enemyCharacter, Vector2 initBulletDir)
     {
@@ -64,7 +57,6 @@ public partial class Player : CharacterBody2D
 
 
 		Velocity = velocity;
-		// MoveAndSlide();
         MoveAndCollide(Velocity * (float)delta);
 	}
 }
