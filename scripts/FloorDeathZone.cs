@@ -12,7 +12,7 @@ public partial class FloorDeathZone : Area2D
     {
         if (body is Player player)
         {
-            GetTree().ReloadCurrentScene();
+            GetTree().CallDeferred(SceneTree.MethodName.ReloadCurrentScene);
         }
     }
 }
