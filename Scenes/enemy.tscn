@@ -12,6 +12,7 @@
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_hghv2")
+Speed = 150.0
 
 [node name="ColorRect" type="ColorRect" parent="EnemyCharacter"]
 anchors_preset = 8

@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f60y1"]
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 0
+collision_layer = 8
 script = ExtResource("1_v0iea")
 
 [node name="Pivot" type="Node2D" parent="."]
@@ -48,3 +48,5 @@ color = Color(0, 0, 0, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_f60y1")
+
+[connection signal="BulletHitEnemy" from="Pivot/BulletSpawnPoint" to="." method="OnBulletHitEnemy"]

@@ -7,26 +7,20 @@ public partial class BulletSpawnPoint : Node2D
     private PackedScene bulletPackedScene;
 
     [Signal]
-    public delegate void BulletHitEnemyEventHandler(EnemyCharacter Enemy);
+    public delegate void BulletHitEnemyEventHandler(EnemyCharacter enemyCharacter, Vector2 initBulletDir);
 
     static readonly private StringName ShootInput = "shoot";
 
-    private void OnBulletBodyEntered(Node2D body)
-    {
-        if (body is EnemyCharacter enemyCharacter)
-        {
-            EmitSignal(SignalName.BulletHitEnemy, enemyCharacter);
-        }
-    }
+    private void OnBulletHitEnemy(EnemyCharacter enemyCharacter, Vector2 initBulletDir) => EmitSignal(SignalName.BulletHitEnemy, enemyCharacter, initBulletDir);
 
     public override void _PhysicsProcess(double delta)
     {
         if (Input.IsActionJustPressed(ShootInput))
         {
-            var bullet = bulletPackedScene.Instantiate<Area2D>();
+            var bullet = bulletPackedScene.Instantiate<Bullet>();
             bullet.Rotation = GlobalRotation;
             bullet.Position = GlobalPosition;
-            bullet.BodyEntered += OnBulletBodyEntered;
+            bullet.EnemyHit += OnBulletHitEnemy;
             AddChild(bullet);
         }
     }

@@ -3,7 +3,8 @@ using System;
 
 public partial class EnemyCharacter : CharacterBody2D
 {
-	public const float Speed = 300.0f;
+    [Export]
+	public float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
 	private Vector2 direction = Vector2.Left;
 	private RayCast2D rayCast2DLeft;

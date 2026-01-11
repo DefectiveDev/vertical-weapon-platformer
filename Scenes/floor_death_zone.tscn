@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://org7du7yupxl"]
+
+[ext_resource type="Script" uid="uid://bny7hx1e4p7dq" path="res://scripts/FloorDeathZone.cs" id="1_yffyl"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cwye7"]
+distance = 2.0
+
+[node name="FloorDeathZone" type="Area2D"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("1_yffyl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_cwye7")

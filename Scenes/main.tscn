@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxlki3y1ksc6o"]
+[gd_scene load_steps=6 format=3 uid="uid://bxlki3y1ksc6o"]
 
 [ext_resource type="PackedScene" uid="uid://4p83eae6htys" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://c51fatmvfemv0" path="res://Scenes/enemy.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://org7du7yupxl" path="res://Scenes/floor_death_zone.tscn" id="3_8gbba"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jjgbg"]
 
@@ -12,7 +13,7 @@ height = 10
 [node name="Main" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(182, 628)
+position = Vector2(118, 275)
 
 [node name="Enemy" parent="." instance=ExtResource("2_bo1nx")]
 position = Vector2(186, 567)
@@ -46,6 +47,9 @@ texture = SubResource("NoiseTexture2D_jjgbg")
 [node name="Floor" type="StaticBody2D" parent="WorldCollisions"]
 position = Vector2(360, 630)
 metadata/_edit_group_ = true
+
+[node name="FloorDeathZone" parent="WorldCollisions/Floor" instance=ExtResource("3_8gbba")]
+position = Vector2(0, -10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollisions/Floor"]
 shape = SubResource("WorldBoundaryShape2D_jjgbg")

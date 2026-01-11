@@ -1,15 +1,35 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class Player : CharacterBody2D
 {
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+	public const float BounceDecay = 1.0f;
+	public const float RecoilImpulse = -400.0f;
 	
 	private Node2D pivot;
+	private RayCast2D rayCastLeft;
+	private RayCast2D rayCastRight;
 
-    public override void _Ready() => pivot = GetNode<Node2D>("Pivot");
+    private Func<Vector2,Vector2> bulletHitCalculate;
 
+    public override void _Ready()
+    {
+        pivot = GetNode<Node2D>("Pivot");
+
+        rayCastLeft = GetNode<RayCast2D>("RayCastLeft");
+        rayCastRight = GetNode<RayCast2D>("RayCastRight");
+    }
+
+    private void OnBulletHitEnemy(EnemyCharacter enemyCharacter, Vector2 initBulletDir)
+    {
+        bulletHitCalculate += (Vector2 velocity) =>
+        {
+            velocity.X += initBulletDir.X * RecoilImpulse;
+            velocity.Y = initBulletDir.Y * RecoilImpulse;
+            return velocity;
+        };
+    }
 
     public override void _Process(double delta)
     {
@@ -26,25 +46,25 @@ public partial class Player : CharacterBody2D
 			velocity += GetGravity() * (float)delta;
 		}
 
-		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-		{
-			velocity.Y = JumpVelocity;
-		}
+		velocity.X = Mathf.MoveToward(Velocity.X, 0, BounceDecay);
 
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		if (direction != Vector2.Zero)
-		{
-			velocity.X = direction.X * Speed;
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-		}
+        if (bulletHitCalculate != null)
+        {
+            velocity = bulletHitCalculate.Invoke(velocity);
+            bulletHitCalculate = null;
+        }
+
+        KinematicCollision2D collision = MoveAndCollide(velocity * (float)delta, testOnly: true);
+
+        if (collision != null)
+        {
+            // GD.Print(collision.GetPosition().X);
+            velocity = velocity.Bounce(collision.GetNormal());
+        }
+
 
 		Velocity = velocity;
-		MoveAndSlide();
+		// MoveAndSlide();
+        MoveAndCollide(Velocity * (float)delta);
 	}
 }
