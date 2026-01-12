@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public partial class HUD : Control
 {
     [Export]
-    private CharacterBody2D player
+    private CharacterBody2D Player
     {
         get
         {
@@ -15,11 +15,16 @@ public partial class HUD : Control
 
         set
         {
-            _player =value;
+            _player = value;
             UpdateConfigurationWarnings();
         }
     }
     private CharacterBody2D _player = null;
+
+    private Label scoreLabel;
+
+    private float initPlayerYPos;
+    private float highestPlayerPos;
 
     public override string[] _GetConfigurationWarnings()
     {
@@ -28,29 +33,43 @@ public partial class HUD : Control
 
         try
         {
-            if(player.GetScript().As<CSharpScript>().ResourcePath.GetFile() != "Player.cs")
+            if(Player.GetScript().As<CSharpScript>().ResourcePath.GetFile() != "Player.cs")
             {
-                //PushWarning instead of handling
+                // PushWarning instead of handling
                 throw new Exception();
             }
         }
-        catch (System.Exception)
+        catch (Exception)
         {
             GD.PushWarning("HUD must be assigned CharacterBody2D with Player script");
-            player = null;
+            // Player = null;
         }
 
-        return warnings.ToArray();
+        return [.. warnings];
     }
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	    GD.Print(player is Player);
-	}
+    public override void _Ready()
+    {
+        if (!Engine.IsEditorHint())
+        {
+            scoreLabel = GetNode<Label>("ScoreLabel");
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+            initPlayerYPos = Player.Position.Y;
+            highestPlayerPos = initPlayerYPos;
+        }
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        if (!Engine.IsEditorHint())
+        {
+            if (Player.Position.Y < highestPlayerPos)
+            {
+                highestPlayerPos = Player.Position.Y;
+            }
+            var score = highestPlayerPos - initPlayerYPos;
+
+            scoreLabel.Text = $"SCORE: {Mathf.Abs(score)/100:0.0}";
+        }
+    }
 }

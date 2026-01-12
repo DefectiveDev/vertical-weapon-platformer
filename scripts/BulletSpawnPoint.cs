@@ -9,7 +9,7 @@ public partial class BulletSpawnPoint : Node2D
     [Signal]
     public delegate void BulletHitEnemyEventHandler(EnemyCharacter enemyCharacter, Vector2 initBulletDir);
 
-    static readonly private StringName ShootInput = "shoot";
+    private static readonly StringName ShootInput = "shoot";
 
     private void OnBulletHitEnemy(EnemyCharacter enemyCharacter, Vector2 initBulletDir) => EmitSignal(SignalName.BulletHitEnemy, enemyCharacter, initBulletDir);
 
