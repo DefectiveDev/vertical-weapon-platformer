@@ -35,7 +35,7 @@ public partial class HUD : CanvasLayer
         {
             try
             {
-                if(Player.GetScript().As<CSharpScript>().ResourcePath.GetFile() != "Player.cs")
+                if(Player.GetScript().As<CSharpScript>().ResourcePath.GetFile() != $"{typeof(Player).Name}.cs")
                 {
                     // PushWarning instead of handling
                     throw new Exception();
