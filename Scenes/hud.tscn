@@ -9,7 +9,10 @@ subpixel_positioning = 0
 default_font = SubResource("SystemFont_3gfia")
 default_font_size = 36
 
-[node name="HUD" type="Control"]
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_e0onf")
+
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,9 +20,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_e0onf")
-script = ExtResource("1_e0onf")
 
-[node name="ScoreLabel" type="Label" parent="."]
+[node name="ScoreLabel" type="Label" parent="Control"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0

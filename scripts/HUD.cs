@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 [Tool]
-public partial class HUD : Control
+public partial class HUD : CanvasLayer
 {
     [Export]
     private CharacterBody2D Player
@@ -31,18 +31,21 @@ public partial class HUD : Control
         base._GetConfigurationWarnings();
         List<string> warnings = [];
 
-        try
+        if (this != GetTree().EditedSceneRoot)
         {
-            if(Player.GetScript().As<CSharpScript>().ResourcePath.GetFile() != "Player.cs")
+            try
             {
-                // PushWarning instead of handling
-                throw new Exception();
+                if(Player.GetScript().As<CSharpScript>().ResourcePath.GetFile() != "Player.cs")
+                {
+                    // PushWarning instead of handling
+                    throw new Exception();
+                }
             }
-        }
-        catch (Exception)
-        {
-            GD.PushWarning("HUD must be assigned CharacterBody2D with Player script");
-            // Player = null;
+            catch (Exception)
+            {
+                GD.PushWarning("HUD must be assigned CharacterBody2D with Player script");
+                // Player = null;
+            }
         }
 
         return [.. warnings];
@@ -52,7 +55,7 @@ public partial class HUD : Control
     {
         if (!Engine.IsEditorHint())
         {
-            scoreLabel = GetNode<Label>("ScoreLabel");
+            scoreLabel = GetNode<Label>("Control/ScoreLabel");
 
             initPlayerYPos = Player.Position.Y;
             highestPlayerPos = initPlayerYPos;
