@@ -14,7 +14,7 @@ size = Vector2(360, 8.5)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_hghv2")
-Speed = 150.0
+Speed = 250.0
 
 [node name="ColorRect" type="ColorRect" parent="EnemyCharacter"]
 anchors_preset = 8
@@ -41,6 +41,10 @@ target_position = Vector2(19, 0)
 position = Vector2(0, -10)
 target_position = Vector2(-19, 0)
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="EnemyCharacter"]
+position = Vector2(0, -20)
+rect = Rect2(-15, -10, 30, 30)
+
 [node name="Platform" type="StaticBody2D" parent="."]
 collision_layer = 2
 collision_mask = 2
@@ -48,3 +52,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_hghv2")
+
+[connection signal="screen_entered" from="EnemyCharacter/VisibleOnScreenNotifier2D" to="EnemyCharacter" method="OnScreenEntered"]
+[connection signal="screen_exited" from="EnemyCharacter/VisibleOnScreenNotifier2D" to="EnemyCharacter" method="OnScreenExited"]

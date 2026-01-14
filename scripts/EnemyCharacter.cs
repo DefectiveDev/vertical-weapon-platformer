@@ -4,6 +4,9 @@ using System;
 public partial class EnemyCharacter : CharacterBody2D
 {
     [Export]
+    private double maxSpeed = 400f;
+    [Export]
+    private double minSpeed = 200f;
 	public float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
 	private Vector2 direction;
@@ -21,6 +24,8 @@ public partial class EnemyCharacter : CharacterBody2D
         {
             direction = Vector2.Left;
         }
+
+        Speed = (float)GD.RandRange(minSpeed,maxSpeed);
 
         var pos = Position;
         pos.X += GD.RandRange(-50,50);
@@ -48,4 +53,14 @@ public partial class EnemyCharacter : CharacterBody2D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+
+	private void OnScreenEntered()
+    {
+        CollisionLayer = 4;
+    }
+
+    private void OnScreenExited()
+    {
+        CollisionLayer = 0;
+    }
 }

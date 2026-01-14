@@ -3,6 +3,8 @@ using System;
 
 public partial class EnemySpawner : Node
 {
+    [Export]
+    private int initEnemyOffset = 50;
 	[Export]
 	private int enemySpacing = 100;
 	[Export]
@@ -12,7 +14,7 @@ public partial class EnemySpawner : Node
     
     private float highestCamCenterPos;
 
-    private int spawnIndex = 1;
+    private int spawnIndex = 0;
 
 	public override void _Ready()
 	{
@@ -20,7 +22,7 @@ public partial class EnemySpawner : Node
 	    Spawn();
 	}
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (highestCamCenterPos > CameraCenterScreenPos.Y)
         {
@@ -39,7 +41,7 @@ public partial class EnemySpawner : Node
 
 			enemy.GlobalPosition = new Vector2(ViewportCenterPos.X,
 			                                   // Calculated by pixels from spacing into segments of the view port. Then we offset by the bottom of the viewport.
-			                                   (ViewBottomY/ (ViewBottomY/enemySpacing) * -spawnIndex) + ViewBottomY);
+			                                   (ViewBottomY/ (ViewBottomY/enemySpacing) * -spawnIndex) + ViewBottomY - initEnemyOffset);
 			
 			AddChild(enemy);
 		}

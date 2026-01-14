@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 public partial class Player : CharacterBody2D
 {
 	public const float BounceDecay = 1.0f;
-	public const float RecoilImpulse = -400.0f;
+	public const float RecoilImpulse = -500.0f;
 	
 	private Node2D pivot;
 

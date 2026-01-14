@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxlki3y1ksc6o"]
+[gd_scene load_steps=7 format=3 uid="uid://bxlki3y1ksc6o"]
 
 [ext_resource type="PackedScene" uid="uid://4p83eae6htys" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://c51fatmvfemv0" path="res://Scenes/enemy.tscn" id="2_bo1nx"]
@@ -7,10 +7,6 @@
 [ext_resource type="Script" uid="uid://bl8gxxrqo0fs5" path="res://scripts/EnemySpawner.cs" id="5_kry3j"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jjgbg"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jjgbg"]
-width = 10000
-height = 10
 
 [node name="Main" type="Node"]
 
@@ -42,22 +38,13 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollisions/WallLeft"]
 shape = SubResource("WorldBoundaryShape2D_jjgbg")
 
-[node name="Floor" type="StaticBody2D" parent="WorldCollisions"]
-position = Vector2(360, 630)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollisions/Floor"]
-shape = SubResource("WorldBoundaryShape2D_jjgbg")
-
-[node name="Sprite2D" type="Sprite2D" parent="WorldCollisions/Floor"]
-position = Vector2(1, 3)
-texture = SubResource("NoiseTexture2D_jjgbg")
-
 [node name="HUD" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_jjvhh")]
 Player = NodePath("../Player")
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("5_kry3j")
+initEnemyOffset = 40
+enemySpacing = 250
 enemyScene = ExtResource("2_bo1nx")
 
 [node name="KillPlayerZone" type="Node" parent="." node_paths=PackedStringArray("player")]
