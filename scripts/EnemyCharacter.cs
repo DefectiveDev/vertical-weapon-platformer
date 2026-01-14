@@ -6,7 +6,7 @@ public partial class EnemyCharacter : CharacterBody2D
     [Export]
 	public float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
-	private Vector2 direction = Vector2.Left;
+	private Vector2 direction;
 	private RayCast2D rayCast2DLeft;
 	private RayCast2D rayCast2DRight;
 
@@ -17,6 +17,14 @@ public partial class EnemyCharacter : CharacterBody2D
         {
             direction = Vector2.Right;
         }
+        else
+        {
+            direction = Vector2.Left;
+        }
+
+        var pos = Position;
+        pos.X += GD.RandRange(-50,50);
+        Position = pos;
 
         rayCast2DLeft = GetNode<RayCast2D>("RayCastLeft");
         rayCast2DRight = GetNode<RayCast2D>("RayCastRight");

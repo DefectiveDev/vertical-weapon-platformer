@@ -51,8 +51,14 @@ public partial class Player : CharacterBody2D
 
         if (collision != null)
         {
-            // GD.Print(collision.GetPosition().X);
-            velocity = velocity.Bounce(collision.GetNormal());
+            if (!IsOnFloor())
+            {
+                velocity = velocity.Bounce(collision.GetNormal());
+            }
+            else
+            {
+                velocity = velocity.Slide(collision.GetNormal());
+            }
         }
 
 
