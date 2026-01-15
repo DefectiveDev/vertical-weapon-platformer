@@ -37,7 +37,7 @@ public partial class Bullet : Area2D
 
     private void OnEnemyHit(Node2D body)
     {
-        if (body is EnemyCharacter enemyCharacter)
+        if (body is EnemyCharacter)
         {
             Destroy();
         }
