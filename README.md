@@ -1,4 +1,5 @@
 <!-- TODO: -->
+# NEEDED
 1. Add graphics
     a. Enemy
     b. ground for enemies
@@ -11,5 +12,5 @@
 4. Add lost screen
 <!-- TODO: -->
 # OPTIONAL
-1. Column1. Enemy speed changes on combo
+1. Enemy speed changes on combo
 2. Combo system
