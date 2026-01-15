@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Threading.Tasks;
 
 public partial class Player : CharacterBody2D
 {
@@ -14,9 +13,9 @@ public partial class Player : CharacterBody2D
     public override void _Ready() => pivot = GetNode<Node2D>("Pivot");
 
 
-    private void OnBulletHitEnemy(EnemyCharacter enemyCharacter, Vector2 initBulletDir)
+    private void OnBulletHitEnemy(EnemyCharacter _, Vector2 initBulletDir)
     {
-        bulletHitCalculate += (Vector2 velocity) =>
+        bulletHitCalculate += velocity =>
         {
             velocity.X += initBulletDir.X * RecoilImpulse;
             velocity.Y = initBulletDir.Y * RecoilImpulse;
