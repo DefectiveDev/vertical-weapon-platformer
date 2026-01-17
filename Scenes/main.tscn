@@ -51,3 +51,4 @@ enemyScene = ExtResource("2_bo1nx")
 [node name="KillPlayerZone" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("5_21xkr")
 player = NodePath("../Player")
+DeathZoneY = 100.0
