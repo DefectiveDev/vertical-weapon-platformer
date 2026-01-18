@@ -15,9 +15,13 @@ run/main_scene="uid://bxlki3y1ksc6o"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://themes/default_bus_layout.tres"
+
 [autoload]
 
-Music="*res://Scenes/music.tscn"
+Audio="*res://Scenes/audio.tscn"
 
 [display]
 

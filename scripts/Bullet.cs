@@ -10,33 +10,46 @@ public partial class Bullet : Area2D
 
     private Vector2 initBulletDir;
     private ShapeCast2D shapeCast2D;
+    private Node2D pivot;
+    private bool hasBeenDestroyed = false;
+    private bool audioFinished = false;
 
     public override void _Ready()
     {
         TopLevel = true;
-        BodyEntered += OnHitGround;
-        BodyEntered += OnEnemyHit;
+        BodyEntered += OnHit;
 
         shapeCast2D = GetNode<ShapeCast2D>("ShapeCast2D");
         initBulletDir = Vector2.Right.Rotated(Rotation);
         shapeCast2D.TargetPosition = initBulletDir * int.MaxValue;
+        pivot = GetNode<Node2D>("Pivot");
     }
 
-    private void Destroy() => QueueFree();
-
-
-    private void OnHitGround(Node2D body)
-    {
-        // 1 is ground layer
-        if (body is CollisionObject2D collisionBody && collisionBody.GetCollisionLayerValue(1))
+    private void Destroy() {
+        SetDeferred(Area2D.PropertyName.Monitoring, false);
+        SetDeferred(Area2D.PropertyName.Monitorable, false);
+        pivot.Hide();
+        hasBeenDestroyed = true;
+        if (audioFinished && hasBeenDestroyed)
         {
-            Destroy();
+            QueueFree();
         }
     }
 
-    private void OnEnemyHit(Node2D body)
+    private void OnAudioFinished()
     {
-        if (body is EnemyCharacter)
+        audioFinished = true;
+        if (audioFinished && hasBeenDestroyed)
+        {
+            QueueFree();
+        }
+    }
+
+
+    private void OnHit(Node2D body)
+    {
+        // 1 is ground layer
+        if (body is CollisionObject2D collisionBody && collisionBody.GetCollisionLayerValue(1) || body is EnemyCharacter )
         {
             Destroy();
         }
