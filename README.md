@@ -7,7 +7,6 @@
     1. floor for player to hit
 1. Add sound
     1. sfx
-    1. music
 <!-- TODO: -->
 # OPTIONAL
 1. Enemy speed changes on combo
