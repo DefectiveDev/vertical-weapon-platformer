@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Vertical Weapon Platformer"
+config/name="Recoil Reach"
 run/main_scene="uid://bxlki3y1ksc6o"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bso378r13wttq"
 
 [audio]
 
@@ -53,3 +53,7 @@ shoot={
 
 2d/default_gravity=367.5
 common/physics_interpolation=true
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
