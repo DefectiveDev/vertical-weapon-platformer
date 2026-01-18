@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c51fatmvfemv0"]
+[gd_scene load_steps=4 format=3 uid="uid://c51fatmvfemv0"]
 
 [ext_resource type="Script" uid="uid://br7ueqqc2rgnr" path="res://scripts/EnemyCharacter.cs" id="1_hghv2"]
-[ext_resource type="FontFile" uid="uid://6ak1hod8gjye" path="res://assets/fonts/PixelifySans/PixelifySans-VariableFont_wght.ttf" id="2_1f0kj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ne65n"]
 size = Vector2(30, 30)
@@ -44,33 +43,6 @@ target_position = Vector2(-19, 0)
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="EnemyCharacter"]
 position = Vector2(0, -20)
 rect = Rect2(-15, -10, 30, 30)
-
-[node name="Alert" type="Control" parent="EnemyCharacter"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="EnemyCharacter/Alert"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -109.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_fonts/font = ExtResource("2_1f0kj")
-theme_override_font_sizes/font_size = 32
-text = "!"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Platform" type="StaticBody2D" parent="."]
 collision_layer = 2
