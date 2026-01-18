@@ -13,9 +13,10 @@
 
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
 z_index = 1
-position = Vector2(180, 320)
+position = Vector2(180, 211)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, 109)
 process_callback = 0
 limit_left = 0
 limit_right = 360
@@ -57,4 +58,5 @@ script = ExtResource("5_21xkr")
 player = NodePath("../Player")
 DeathZoneY = 100.0
 
+[connection signal="GameOver" from="KillPlayerZone" to="Player" method="OnGameOver"]
 [connection signal="GameOver" from="KillPlayerZone" to="HUD/GameStartAndOver" method="OnGameOver"]
