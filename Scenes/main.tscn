@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxlki3y1ksc6o"]
+[gd_scene load_steps=8 format=3 uid="uid://bxlki3y1ksc6o"]
 
 [ext_resource type="PackedScene" uid="uid://4p83eae6htys" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://67vijrrgni4b" path="res://Scenes/game_start_and_over.tscn" id="2_21xkr"]
 [ext_resource type="PackedScene" uid="uid://c51fatmvfemv0" path="res://Scenes/enemy.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://3ov6bmf8spxo" path="res://Scenes/hud.tscn" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://c86ipxker30r0" path="res://scripts/KillPlayerZone.cs" id="5_21xkr"]
@@ -40,7 +41,10 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_jjgbg")
 
 [node name="HUD" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_jjvhh")]
+visible = true
 Player = NodePath("../Player")
+
+[node name="GameStartAndOver" parent="HUD" instance=ExtResource("2_21xkr")]
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("5_kry3j")
@@ -52,3 +56,5 @@ enemyScene = ExtResource("2_bo1nx")
 script = ExtResource("5_21xkr")
 player = NodePath("../Player")
 DeathZoneY = 100.0
+
+[connection signal="GameOver" from="KillPlayerZone" to="HUD/GameStartAndOver" method="OnGameOver"]

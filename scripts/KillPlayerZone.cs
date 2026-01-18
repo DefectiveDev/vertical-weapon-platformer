@@ -8,6 +8,8 @@ public partial class KillPlayerZone : Node
     private float DeathZoneY = 20;
     private float curHighestBottomScreenPos;
     private float BottomOfScreenPos => GetViewport().GetVisibleRect().GetCenter().Y + GetViewport().GetCamera2D().GetScreenCenterPosition().Y;
+    [Signal]
+    public delegate void GameOverEventHandler();
 
     public override void _Ready()
     {
@@ -25,7 +27,8 @@ public partial class KillPlayerZone : Node
 
         if (player.Position.Y > curHighestBottomScreenPos + DeathZoneY)
         {
-            GetTree().CallDeferred(SceneTree.MethodName.ReloadCurrentScene);
+            // GetTree().CallDeferred(SceneTree.MethodName.ReloadCurrentScene);
+            EmitSignal(SignalName.GameOver);
         }
     }
 }

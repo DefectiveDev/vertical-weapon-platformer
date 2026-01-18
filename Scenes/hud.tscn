@@ -1,13 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://3ov6bmf8spxo"]
+[gd_scene load_steps=3 format=3 uid="uid://3ov6bmf8spxo"]
 
 [ext_resource type="Script" uid="uid://byxaem0fu4dvu" path="res://scripts/HUD.cs" id="1_e0onf"]
-[ext_resource type="FontFile" uid="uid://6ak1hod8gjye" path="res://assets/fonts/PixelifySans/PixelifySans-VariableFont_wght.ttf" id="2_fccik"]
-
-[sub_resource type="Theme" id="Theme_e0onf"]
-default_font = ExtResource("2_fccik")
-default_font_size = 36
+[ext_resource type="Theme" uid="uid://bevwy6uu4xquy" path="res://themes/main_theme.tres" id="2_fccik"]
 
 [node name="HUD" type="CanvasLayer"]
+visible = false
 script = ExtResource("1_e0onf")
 
 [node name="Control" type="Control" parent="."]
@@ -17,7 +14,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_e0onf")
+mouse_filter = 1
+theme = ExtResource("2_fccik")
 
 [node name="ScoreLabel" type="Label" parent="Control"]
 layout_mode = 1

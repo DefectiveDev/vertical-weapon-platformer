@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://67vijrrgni4b"]
+
+[ext_resource type="Theme" uid="uid://bevwy6uu4xquy" path="res://themes/main_theme.tres" id="1_2i66m"]
+[ext_resource type="Script" uid="uid://bptnm7ncxnh47" path="res://scripts/GameStartAndOver.cs" id="1_12iku"]
+
+[node name="GameStartAndOver" type="CanvasLayer"]
+script = ExtResource("1_12iku")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2i66m")
+
+[node name="GameStart" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Control/GameStart"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Click Screen to start
+
+Players Guide:
+Click red enemies to gain height and momentum"
+autowrap_mode = 2
+
+[node name="GameOver" type="Control" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1309, 0.1309, 0.17, 0.49019608)
+
+[node name="Button" type="Button" parent="Control/GameOver"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_bottom = -169.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Click to Reset"
+
+[connection signal="pressed" from="Control/GameStart/Button" to="." method="OnGameStart"]
+[connection signal="pressed" from="Control/GameOver/Button" to="." method="OnGameOverScreenPressed"]
