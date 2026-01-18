@@ -8,8 +8,6 @@
 1. Add sound
     1. sfx
     1. music
-1. Add Startup screen
-1. Add lost screen
 <!-- TODO: -->
 # OPTIONAL
 1. Enemy speed changes on combo
