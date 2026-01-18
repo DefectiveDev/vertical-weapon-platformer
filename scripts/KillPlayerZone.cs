@@ -25,7 +25,7 @@ public partial class KillPlayerZone : Node
             GetViewport().GetCamera2D().LimitBottom = (int)(curHighestBottomScreenPos + DeathZoneY);
         }
 
-        if (player.Position.Y > curHighestBottomScreenPos + DeathZoneY)
+        if (player.Position.Y > curHighestBottomScreenPos + DeathZoneY + 50)
         {
             // GetTree().CallDeferred(SceneTree.MethodName.ReloadCurrentScene);
             EmitSignal(SignalName.GameOver);
