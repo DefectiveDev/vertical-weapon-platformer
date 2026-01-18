@@ -31,11 +31,12 @@ public partial class Player : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
+		float deltaf = (float)delta;
 
 		// Add the gravity.
 		if (!IsOnFloor())
 		{
-			velocity += GetGravity() * (float)delta;
+			velocity += GetGravity() * deltaf;
 		}
 
 		velocity.X = Mathf.MoveToward(Velocity.X, 0, BounceDecay);
@@ -46,7 +47,7 @@ public partial class Player : CharacterBody2D
             bulletHitCalculate = null;
         }
 
-        KinematicCollision2D collision = MoveAndCollide(velocity * (float)delta, testOnly: true);
+        KinematicCollision2D collision = MoveAndCollide(velocity * deltaf, testOnly: true);
 
         if (collision != null)
         {
@@ -62,6 +63,6 @@ public partial class Player : CharacterBody2D
 
 
 		Velocity = velocity;
-        MoveAndCollide(Velocity * (float)delta);
+        MoveAndCollide(Velocity * deltaf);
 	}
 }
