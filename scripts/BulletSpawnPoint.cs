@@ -11,10 +11,16 @@ public partial class BulletSpawnPoint : Node2D
 
     private static readonly StringName ShootInput = "shoot";
 
+    public bool gameOver = false;
+
     private void OnBulletHitEnemy(EnemyCharacter enemyCharacter, Vector2 initBulletDir) => EmitSignal(SignalName.BulletHitEnemy, enemyCharacter, initBulletDir);
 
     public override void _PhysicsProcess(double delta)
     {
+        if (gameOver)
+        {
+            return;
+        }
         if (Input.IsActionJustPressed(ShootInput))
         {
             var bullet = bulletPackedScene.Instantiate<Bullet>();

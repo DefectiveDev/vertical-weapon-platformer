@@ -5,16 +5,31 @@ public partial class Player : CharacterBody2D
 {
 	public const float BounceDecay = 1.0f;
 	public const float RecoilImpulse = -500.0f;
+	private bool gameOver = false;
 	
 	private Node2D pivot;
 
     private Func<Vector2,Vector2> bulletHitCalculate;
 
-    public override void _Ready() => pivot = GetNode<Node2D>("Pivot");
+    public override void _Ready()  
+    {
+        pivot = GetNode<Node2D>("Pivot");
+
+    }
+
+    private void OnGameOver() {
+        gameOver = true;
+        var bulletSpawnPoint = GetNode<BulletSpawnPoint>("Pivot/BulletSpawnPoint");
+        bulletSpawnPoint.gameOver = this.gameOver;
+    }
 
 
     private void OnBulletHitEnemy(EnemyCharacter _, Vector2 initBulletDir)
     {
+        if (gameOver)
+        {
+            return;
+        }
         bulletHitCalculate += velocity =>
         {
             velocity.X += initBulletDir.X * RecoilImpulse;
@@ -25,11 +40,19 @@ public partial class Player : CharacterBody2D
 
     public override void _Process(double delta)
     {
+        if (gameOver)
+        {
+            return;
+        }
         pivot.LookAt(GetGlobalMousePosition());
     }
 
 	public override void _PhysicsProcess(double delta)
 	{
+	    if (gameOver)
+	    {
+	        return;
+	    }
 		Vector2 velocity = Velocity;
 		float deltaf = (float)delta;
 
